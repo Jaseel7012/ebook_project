@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card p-3" style="width: 18rem;">
+               <h4>Do you want to delete {{book.title}}  ?</h4>
+               <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete" class="btn btn-danger">
+               </form>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

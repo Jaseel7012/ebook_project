@@ -1,0 +1,60 @@
+{% extends 'user/navbar.html' %}
+
+
+
+{% block content %}
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card" >
+        <div class="card-body">
+            {% if not cart_items %}
+            <p>Your Cart is An Empty..</p>
+            {% else %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">R No</th>
+                    <th scope="col">Book</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    {% for item in cart_items %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{item.book.title}}</td>
+                    <td>{{item.book.author}}</td>
+                    <td>{{item.book.price}}</td>
+                    <td><a href="{% url 'decrease-quantity' item.id %}">-</a>
+                      <input type="number" name="" id="" value="{{item.quantity}}" style="width: 80px;">
+                      <a href="{% url 'increase-quantity' item.id %}" >+</a>
+                    </td>
+                    <td><a href="{% url 'romove-item' item.id %}" ><i class="fa fa-trash-o"  style="font-size:36px; color: brown;"></i></a></td>
+                   
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div class="card float-end" style="height: 200px;">
+                <div class="card-body">
+                  <form action="{% url 'create-checkout-session' %}" method="post">
+                    {% csrf_token %}
+                  <p>Total : {{total_price}}</p>
+                  <p>Total Products : {{total_count}}</p>
+                  <button type="submit"  class="btn btn-success">Check Now</button>
+                  </form>
+                </div>
+              </div>
+            {% endif %}
+        </div>
+        
+      </div>
+</div>
+
+{% endblock %}
