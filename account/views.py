@@ -12,14 +12,10 @@ import stripe
 from django.conf import settings
 from django.urls import reverse
 
-# from . models import Cart,CartItem
 
-# Create your views here.
 
 def listBooks(request):
     username=request.user.username
-    
-    # image=request.session['image']
     books=Book.objects.all()
     paginator=Paginator(books,4)
     page_number=request.GET.get('page')
@@ -34,19 +30,17 @@ def listBooks(request):
     return render(request,'user/list_book.html',context)
 
 def detailBook(request,book_id):
-    
-   
-    # image=request.session['image']
+    username=request.user.username
     book=Book.objects.get(id=book_id)
     context={
       
-        'book':book
+        'book':book,
+        'username':username
     }
     return render(request,'user/detail_book.html',context)
 
 def searchBook(request):
-    
-    # image=request.session['image']
+    username=request.user.username
     query=None
     books=None
     if 'name' in request.GET:
@@ -57,6 +51,7 @@ def searchBook(request):
     context={
         'books':books,
         'query':query,
+        'username':username
         
         
 
@@ -101,15 +96,15 @@ def userLogin(request):
         user=auth.authenticate(username=username,password=password)
         print(user)
         if user is not None:
-            type=request.POST.get('type')
-            print(type)
-            if type == 'user':
+            if username == 'admin' and password == '1234':
+                login(request,user)
+                return redirect('list-book')
+            
+            else:
                 login(request,user)
                 return redirect('book-list-user')
-            elif type=='admin':
-                if username == 'admin' and password == '1234':
-                    login(request,user)
-                    return redirect('list-book')
+        
+            
         else:
             messages.info(request,'Invalid credential')
             return redirect('login')
@@ -118,20 +113,6 @@ def userLogin(request):
 def userLogout(request):
     logout(request)
     return redirect('login')
-                
-                
-
-              
-               
-               
-          
-                    
-                    
-              
-  
-
-#cart
-
 def add_to_cart(request,book_id):
     book=Book.objects.get(id=book_id)
     
@@ -148,12 +129,8 @@ def add_to_cart(request,book_id):
     except :
         messages.error('login required')
     
-    
-    
-
-
 def view_cart(request):
-
+    username=request.user.username
     cart,create=Cart.objects.get_or_create(user=request.user)
     cart_items=cart.cartitem_set.all()
     cart_item=CartItem.objects.all()
@@ -163,7 +140,8 @@ def view_cart(request):
         'cart_item':cart_item,
         'cart_items': cart_items,
         'total_price':total_price,
-        'total_count':total_count
+        'total_count':total_count,
+        'username':username
 
     }
     return render(request,'user/cart.html',context)

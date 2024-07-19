@@ -1,15 +1,14 @@
 {% extends 'account/basepage.html' %}
 {% block content %}
-<h3>Registration page</h3>
-<hr>
+
 <div class="d-flex justify-content-center">
     {% for msg in messages %}
     <div class="alert " style="width: 50%;">
         <div class="alert alert-info text-center" role="alert">
             {{msg}}
-          </div>
+        </div>
     </div>
-    
+
     {% endfor %}
 </div>
 
@@ -17,52 +16,58 @@
 
 <div class="container">
     <div class="row">
+
         <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xxl-12 col-xl-12">
             <div class="card mt-5">
+                <div class="text-center">
+                    <h3>Registration page</h3>
+                    <hr>
+                </div>
                 <form action="" method="post">
                     {% csrf_token %}
-                <div class="row container">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-                        <label for="">First Name:</label>
-                        <input type="text" class="form-control" name="fname" id="fname" required>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-           
-                        <label for="">Last Name:</label>
-                        <input type="text" class="form-control" name="lname" id="lname" required>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="row container">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                            <label for="">First Name:</label>
+                            <input type="text" class="form-control" name="fname" id="fname" required>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
 
-                        <label for="">User Name:</label>
-                        <input type="text" class="form-control" name="userName" id="username" required>
+                            <label for="">Last Name:</label>
+                            <input type="text" class="form-control" name="lname" id="lname" required>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+
+                            <label for="">User Name:</label>
+                            <input type="text" class="form-control" name="userName" id="username" required>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                            <label for="">email:</label>
+                            <input type="text" class="form-control" name="email" id="email" required>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                            <label for="">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+
+                            <label for="">Confirm Password:</label>
+                            <input type="password" class="form-control" name="cpassword" id="cpassword">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-4 mb-2 ">
+                            <input type="submit" value="Register" class="btn btn-secondary">
+                            <p><a href="{% url 'login' %}">Login Here</a></p>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-                        <label for="">email:</label>
-                        <input type="text" class="form-control" name="email" id="email" required>
-                    </div>
-                   
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-                        <label for="">Password:</label>
-                        <input type="password" class="form-control" name="password" id="password">
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-                                       
-                    <label for="">Confirm Password:</label>
-                    <input type="password" class="form-control" name="cpassword" id="cpassword">
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-4 ">
-                        <input type="submit" value="Register" class="btn btn-secondary" >
-                    </div>
-                </div>
-            </form>
-                
-                    
-  
-                   
-      
-       
-     
-                    
+                </form>
+
+
+
+
+
+
+
+
                 </form>
             </div>
         </div>
